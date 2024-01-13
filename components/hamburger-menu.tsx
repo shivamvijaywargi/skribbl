@@ -12,7 +12,7 @@ const HamburgerMenu = () => {
   return (
     <div className="absolute top-4 left-4">
       <DropdownMenu>
-        <DropdownMenuTrigger className="bg-gray-100 dark:bg-gray-700 p-1 rounded">
+        <DropdownMenuTrigger className="bg-secondary p-1 rounded">
           <Menu />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
