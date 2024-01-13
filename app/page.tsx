@@ -1,7 +1,13 @@
+import HamburgerMenu from "@/components/hamburger-menu";
+import Menu from "@/components/menu";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Welcome to Skribble
+    <main className="pt-4 flex justify-between items-center w-full">
+      <HamburgerMenu />
+      <div className="grid place-items-center w-full">
+        <Menu />
+      </div>
     </main>
   );
 }
