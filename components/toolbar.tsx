@@ -1,11 +1,14 @@
 "use client";
 
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 import { Input } from "./ui/input";
 import { Colors } from "../constants";
+import { cn } from "@/lib/utils";
 
 const Toolbar = () => {
+  const [isActive, setIsActive] = useState("");
+
   const updateStrokeWidth = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
@@ -17,9 +20,14 @@ const Toolbar = () => {
         <div className="flex flex-wrap gap-2">
           {Object.values(Colors).map((color) => (
             <div
-              className="h-4 w-4 cursor-pointer hover:ring rounded"
+              className={cn(
+                isActive === color ? "ring" : "",
+                "h-4 w-4 cursor-pointer hover:ring rounded"
+              )}
               style={{ backgroundColor: color }}
               key={color}
+              title={color}
+              onClick={() => setIsActive(color)}
             />
           ))}
         </div>
@@ -32,6 +40,7 @@ const Toolbar = () => {
           max={10}
           step={1}
           onChange={updateStrokeWidth}
+          className="p-0"
         />
       </div>
     </div>
