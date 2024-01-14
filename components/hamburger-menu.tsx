@@ -15,8 +15,8 @@ const HamburgerMenu = () => {
         <DropdownMenuTrigger className="bg-secondary p-1 rounded">
           <Menu />
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start">
-          <DropdownMenuLabel>
+        <DropdownMenuContent align="start" className="bg-secondary">
+          <DropdownMenuLabel className="hover:bg-muted">
             <a href="https://github.com/shivamvijaywargi" target="_blank">
               Shivam Vijaywargi
             </a>

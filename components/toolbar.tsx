@@ -14,7 +14,7 @@ const Toolbar = () => {
   };
 
   return (
-    <div className="dark:bg-secondary p-3 ml-4 mt-8 rounded-xl space-y-4 border shadow max-w-48">
+    <div className="dark:bg-secondary p-3 ml-4 mt-8 rounded-xl space-y-4 border shadow max-w-48 absolute top-12">
       <div>
         <h3 className="text-sm mb-1">Stroke Color</h3>
         <div className="flex flex-wrap gap-2">

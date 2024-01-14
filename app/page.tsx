@@ -1,3 +1,4 @@
+import CanvasBoard from "@/components/canvas-board";
 import HamburgerMenu from "@/components/hamburger-menu";
 import Menu from "@/components/menu";
 import Toolbar from "@/components/toolbar";
@@ -5,7 +6,7 @@ import Toolbar from "@/components/toolbar";
 export default function Home() {
   return (
     <main>
-      <nav className="pt-4 flex justify-between items-center w-full">
+      <nav className="flex justify-between items-center w-full">
         <HamburgerMenu />
         <div className="grid place-items-center w-full">
           <Menu />
@@ -14,6 +15,7 @@ export default function Home() {
       <div>
         <Toolbar />
       </div>
+      <CanvasBoard />
     </main>
   );
 }
