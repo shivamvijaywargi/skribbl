@@ -22,26 +22,17 @@ export function ThemeToggle() {
         <span>Toggle theme</span>
       </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
-        <DropdownMenuSubContent className="bg-secondary">
-          <DropdownMenuItem
-            onClick={() => setTheme("light")}
-            className="hover:bg-muted"
-          >
+        <DropdownMenuSubContent>
+          <DropdownMenuItem onClick={() => setTheme("light")}>
             <Sun className="mr-2 h-[1.2rem] w-[1.2rem]" />
             Light
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => setTheme("dark")}
-            className="hover:bg-muted"
-          >
+          <DropdownMenuItem onClick={() => setTheme("dark")}>
             <Moon className="mr-2 h-[1.2rem] w-[1.2rem]" />
             Dark
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => setTheme("system")}
-            className="hover:bg-muted"
-          >
+          <DropdownMenuItem onClick={() => setTheme("system")}>
             <SunMoon className="mr-2 h-[1.2rem] w-[1.2rem]" />
             System
           </DropdownMenuItem>
