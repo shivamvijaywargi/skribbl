@@ -2,9 +2,10 @@
 
 import { ChangeEvent, useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { Input } from "./ui/input";
 import { Colors } from "../constants";
-import { cn } from "@/lib/utils";
 
 const Toolbar = () => {
   const [isActive, setIsActive] = useState("");

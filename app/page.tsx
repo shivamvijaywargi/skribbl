@@ -3,7 +3,7 @@ import HamburgerMenu from "@/components/hamburger-menu";
 import Menu from "@/components/menu";
 import Toolbar from "@/components/toolbar";
 
-export default function Home() {
+const Home = () => {
   return (
     <main>
       <nav className="flex justify-between items-center w-full">
@@ -18,4 +18,6 @@ export default function Home() {
       <CanvasBoard />
     </main>
   );
-}
+};
+
+export default Home;
