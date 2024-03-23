@@ -26,10 +26,16 @@ const initialToolbarState = {
   tools: {
     [ACTIVE_MENU_ITEMS.PENCIL]: { color: Colors.WHITE, size: 3 },
     [ACTIVE_MENU_ITEMS.ERASER]: { color: "#09090B" as Colors, size: 3 },
+    [ACTIVE_MENU_ITEMS.RECTANGLE]: { color: Colors.WHITE, size: 3 },
+    [ACTIVE_MENU_ITEMS.DIAMOND]: { color: Colors.WHITE, size: 3 },
+    [ACTIVE_MENU_ITEMS.ELLIPSE]: { color: Colors.WHITE, size: 3 },
+    [ACTIVE_MENU_ITEMS.ARROW]: { color: Colors.WHITE, size: 3 },
+    [ACTIVE_MENU_ITEMS.LINE]: { color: Colors.WHITE, size: 3 },
   },
   actions: {
     [ACTION_MENU_ITEMS.UNDO]: {},
     [ACTION_MENU_ITEMS.REDO]: {},
+    [ACTION_MENU_ITEMS.CLEAR]: {},
     [ACTION_MENU_ITEMS.DOWNLOAD]: {},
   },
 };

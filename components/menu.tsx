@@ -1,6 +1,18 @@
 "use client";
 
-import { Download, Eraser, PencilLine, RedoDot, UndoDot } from "lucide-react";
+import {
+  Circle,
+  Diamond,
+  Download,
+  Eraser,
+  Minus,
+  MoveRight,
+  PencilLine,
+  Presentation,
+  RedoDot,
+  Square,
+  UndoDot,
+} from "lucide-react";
 
 import { useMenuStore } from "@/store";
 import { ACTION_MENU_ITEMS, ACTIVE_MENU_ITEMS } from "@/constants";
@@ -21,6 +33,36 @@ const activeItems = [
     Icon: Eraser,
     size: 20,
   },
+  {
+    id: ACTIVE_MENU_ITEMS.RECTANGLE,
+    title: "Rectangle",
+    Icon: Square,
+    size: 20,
+  },
+  {
+    id: ACTIVE_MENU_ITEMS.DIAMOND,
+    title: "Diamond",
+    Icon: Diamond,
+    size: 20,
+  },
+  {
+    id: ACTIVE_MENU_ITEMS.ELLIPSE,
+    title: "Ellipse",
+    Icon: Circle,
+    size: 20,
+  },
+  {
+    id: ACTIVE_MENU_ITEMS.ARROW,
+    title: "Arrow",
+    Icon: MoveRight,
+    size: 20,
+  },
+  {
+    id: ACTIVE_MENU_ITEMS.LINE,
+    title: "Line",
+    Icon: Minus,
+    size: 20,
+  },
 ];
 
 const actionItems = [
@@ -34,6 +76,12 @@ const actionItems = [
     id: ACTION_MENU_ITEMS.REDO,
     title: "Redo",
     Icon: RedoDot,
+    size: 20,
+  },
+  {
+    id: ACTION_MENU_ITEMS.CLEAR,
+    title: "Clear",
+    Icon: Presentation,
     size: 20,
   },
   {
