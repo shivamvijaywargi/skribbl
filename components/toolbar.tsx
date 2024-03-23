@@ -3,11 +3,14 @@
 import { ChangeEvent, useState } from "react";
 
 import { cn } from "@/lib/utils";
+import { useMenuStore } from "@/store";
 
 import { Input } from "./ui/input";
 import { Colors } from "../constants";
 
 const Toolbar = () => {
+  const { activeMenuItem } = useMenuStore();
+
   const [isActive, setIsActive] = useState("");
 
   const updateStrokeWidth = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +37,7 @@ const Toolbar = () => {
         </div>
       </div>
       <div>
-        <h3 className="text-sm">Stroke Width</h3>
+        <h3 className="text-sm">Stroke Width {activeMenuItem}</h3>
         <Input
           type="range"
           min={1}
