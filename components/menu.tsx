@@ -45,10 +45,14 @@ const actionItems = [
 ];
 
 const Menu = () => {
-  const { setActiveMenu, activeMenuItem } = useMenuStore();
+  const { setActiveMenu, activeMenuItem, setActionMenu } = useMenuStore();
 
   const handleActiveMenuClick = (itemName: ACTIVE_MENU_ITEMS) => {
     setActiveMenu(itemName);
+  };
+
+  const handleActionMenuClick = (itemName: ACTION_MENU_ITEMS) => {
+    setActionMenu(itemName);
   };
 
   return (
@@ -71,8 +75,13 @@ const Menu = () => {
         className="bg-gray-200 dark:bg-gray-700 h-[35px]"
       />
 
-      {actionItems.map(({ Icon, title, size }) => (
-        <span key={title}>
+      {actionItems.map(({ Icon, title, size, id }) => (
+        <span
+          key={title}
+          onClick={() => {
+            handleActionMenuClick(id);
+          }}
+        >
           <IconButton title={title}>
             <Icon size={size} />
           </IconButton>
