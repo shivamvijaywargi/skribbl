@@ -43,7 +43,7 @@ interface IToolbarStore extends IToolbarState {
 const initialToolbarState = {
   tools: {
     [ACTIVE_MENU_ITEMS.PENCIL]: { color: Colors.WHITE, size: 3 },
-    [ACTIVE_MENU_ITEMS.ERASER]: { color: Colors.WHITE, size: 3 },
+    [ACTIVE_MENU_ITEMS.ERASER]: { color: "#09090B" as Colors, size: 3 },
   },
   actions: {
     [ACTION_MENU_ITEMS.UNDO]: {},
