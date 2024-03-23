@@ -6,7 +6,8 @@ const IconButton = ({
   children,
 }: {
   title?: string;
-  isActive: string;
+  isActive?: string;
+  onClick?: () => void;
   children: React.ReactNode;
 }) => {
   return (
