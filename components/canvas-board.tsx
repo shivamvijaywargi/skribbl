@@ -16,6 +16,8 @@ const CanvasBoard = () => {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const shouldDraw = useRef(false);
+  const canvasHistory = useRef<ImageData[]>([]);
+  const historyPosition = useRef(0);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -36,9 +38,28 @@ const CanvasBoard = () => {
       link.href = URL;
       link.download = `Skribbl-${Date.now()}.jpg`;
       link.click();
+    } else if (
+      actionMenuItem === ACTION_MENU_ITEMS.UNDO ||
+      actionMenuItem === ACTION_MENU_ITEMS.REDO
+    ) {
+      if (
+        historyPosition.current > 0 &&
+        actionMenuItem === ACTION_MENU_ITEMS.UNDO
+      ) {
+        historyPosition.current--;
+      }
 
-      setActionMenu(null);
+      if (
+        historyPosition.current < canvasHistory.current.length - 1 &&
+        actionMenuItem === ACTION_MENU_ITEMS.REDO
+      ) {
+        historyPosition.current++;
+      }
+
+      ctx.putImageData(canvasHistory.current[historyPosition.current], 0, 0);
     }
+
+    setActionMenu(null);
   }, [actionMenuItem, setActionMenu, theme]);
 
   useEffect(() => {
@@ -47,6 +68,8 @@ const CanvasBoard = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
+    if (!ctx) return;
+
     // Set canvas width and height on mount
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -54,19 +77,24 @@ const CanvasBoard = () => {
     const handleMouseDown = (e: MouseEvent) => {
       shouldDraw.current = true;
 
-      ctx?.beginPath();
-      ctx?.moveTo(e.clientX, e.clientY);
+      ctx.beginPath();
+      ctx.moveTo(e.clientX, e.clientY);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!shouldDraw.current) return;
 
-      ctx?.lineTo(e.clientX, e.clientY);
-      ctx?.stroke();
+      ctx.lineTo(e.clientX, e.clientY);
+      ctx.stroke();
     };
 
     const handleMouseUp = () => {
       shouldDraw.current = false;
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      canvasHistory.current.push(imageData);
+      historyPosition.current = canvasHistory.current.length - 1;
     };
 
     canvas.addEventListener("mousedown", handleMouseDown);
