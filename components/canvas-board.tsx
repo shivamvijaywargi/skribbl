@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
 import { useMenuStore, useToolbarStore } from "@/store";
-import { ACTION_MENU_ITEMS } from "@/constants";
+import { ACTION_MENU_ITEMS, ACTIVE_MENU_ITEMS } from "@/constants";
 
 const CanvasBoard = () => {
   const { theme } = useTheme();
@@ -16,6 +16,8 @@ const CanvasBoard = () => {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const shouldDraw = useRef(false);
+  const startX = useRef(0);
+  const startY = useRef(0);
   const canvasHistory = useRef<ImageData[]>([]);
   const historyPosition = useRef(0);
 
@@ -57,6 +59,10 @@ const CanvasBoard = () => {
       }
 
       ctx.putImageData(canvasHistory.current[historyPosition.current], 0, 0);
+    } else if (actionMenuItem === ACTION_MENU_ITEMS.CLEAR) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvasHistory.current = [];
+      setActionMenu(null);
     }
 
     setActionMenu(null);
@@ -79,13 +85,32 @@ const CanvasBoard = () => {
 
       ctx.beginPath();
       ctx.moveTo(e.clientX, e.clientY);
+
+      if (activeMenuItem === ACTIVE_MENU_ITEMS.LINE) {
+        startX.current = e.clientX;
+        startY.current = e.clientY;
+      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!shouldDraw.current) return;
 
-      ctx.lineTo(e.clientX, e.clientY);
-      ctx.stroke();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = size;
+
+      if (canvasHistory.current.length > 0) {
+        ctx.putImageData(canvasHistory.current[historyPosition.current], 0, 0);
+      }
+
+      if (activeMenuItem === ACTIVE_MENU_ITEMS.LINE) {
+        ctx.beginPath();
+        ctx.moveTo(startX.current, startY.current);
+        ctx.lineTo(e.clientX, e.clientY);
+        ctx.stroke();
+      } else {
+        ctx.lineTo(e.clientX, e.clientY);
+        ctx.stroke();
+      }
     };
 
     const handleMouseUp = () => {
@@ -106,7 +131,7 @@ const CanvasBoard = () => {
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseup", handleMouseUp);
     };
-  }, []);
+  }, [activeMenuItem, color, size]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
