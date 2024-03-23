@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Skribbl",
-  description: "Online realtime drawing tool",
+  description: "Online realtime drawing tool - built by Shivam Vijaywargi",
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
