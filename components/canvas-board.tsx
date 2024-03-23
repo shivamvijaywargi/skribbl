@@ -2,7 +2,14 @@
 
 import React, { useEffect, useRef } from "react";
 
+import { useMenuStore, useToolbarStore } from "@/store";
+
 const CanvasBoard = () => {
+  const { activeMenuItem } = useMenuStore();
+  const { tools } = useToolbarStore();
+
+  const { color, size } = tools[activeMenuItem];
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {

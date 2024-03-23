@@ -43,12 +43,13 @@ const Toolbar = () => {
         </div>
       </div>
       <div>
-        <h3 className="text-sm">Stroke Width {activeMenuItem}</h3>
+        <h3 className="text-sm">Stroke Width</h3>
         <Input
           type="range"
           min={1}
           max={10}
           step={1}
+          defaultValue={3}
           onChange={updateStrokeWidth}
           className="p-0"
         />

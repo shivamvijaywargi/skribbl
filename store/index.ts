@@ -14,8 +14,10 @@ export const useMenuStore = create<IMenuState>()(
   devtools((set) => ({
     activeMenuItem: ACTIVE_MENU_ITEMS.PENCIL,
     actionMenuItem: null,
-    setActiveMenu: (menuItem) => set(() => ({ activeMenuItem: menuItem })),
-    setActionMenu: (menuItem) => set(() => ({ actionMenuItem: menuItem })),
+    setActiveMenu: (menuItem) =>
+      set((state) => ({ ...state, activeMenuItem: menuItem })),
+    setActionMenu: (menuItem) =>
+      set((state) => ({ ...state, actionMenuItem: menuItem })),
   }))
 );
 

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
 import { Download, Eraser, PencilLine, RedoDot, UndoDot } from "lucide-react";
 
 import { useMenuStore } from "@/store";
 import { ACTION_MENU_ITEMS, ACTIVE_MENU_ITEMS } from "@/constants";
 
 import IconButton from "./icon-button";
+import { Separator } from "./ui/separator";
 
 const activeItems = [
   {
@@ -45,13 +45,10 @@ const actionItems = [
 ];
 
 const Menu = () => {
-  const { setActiveMenu } = useMenuStore();
-
-  const [isActive, setIsActive] = useState(activeItems[0].title);
+  const { setActiveMenu, activeMenuItem } = useMenuStore();
 
   const handleActiveMenuClick = (itemName: ACTIVE_MENU_ITEMS) => {
     setActiveMenu(itemName);
-    setIsActive(itemName);
   };
 
   return (
@@ -63,11 +60,16 @@ const Menu = () => {
             handleActiveMenuClick(id);
           }}
         >
-          <IconButton title={title} isActive={isActive}>
+          <IconButton title={title} isActive={activeMenuItem}>
             <Icon size={size} />
           </IconButton>
         </span>
       ))}
+
+      <Separator
+        orientation="vertical"
+        className="bg-gray-200 dark:bg-gray-700 h-[35px]"
+      />
 
       {actionItems.map(({ Icon, title, size }) => (
         <span key={title}>
