@@ -1,5 +1,12 @@
 import { cn } from "@/lib/utils";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+
 const IconButton = ({
   title = "",
   isActive = "",
@@ -16,7 +23,14 @@ const IconButton = ({
         "hover:bg-muted p-2 rounded transition cursor-pointer grid place-items-center"
       )}
     >
-      <span title={title}>{children}</span>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>{children}</TooltipTrigger>
+          <TooltipContent>
+            <p>{title}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   );
 };
