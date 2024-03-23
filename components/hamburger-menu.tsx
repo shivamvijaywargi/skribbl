@@ -19,7 +19,7 @@ const HamburgerMenu = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuLabel>
-            <a href="https://github.com/shivamvijaywargi" target="_blank">
+            <a href="https://shivamvijaywargi.dev" target="_blank">
               Shivam Vijaywargi
             </a>
           </DropdownMenuLabel>
