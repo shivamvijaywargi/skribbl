@@ -3,18 +3,24 @@
 import { ChangeEvent, useState } from "react";
 
 import { cn } from "@/lib/utils";
-import { useMenuStore } from "@/store";
+import { useMenuStore, useToolbarStore } from "@/store";
 
 import { Input } from "./ui/input";
 import { Colors } from "../constants";
 
 const Toolbar = () => {
   const { activeMenuItem } = useMenuStore();
+  const { changeWidth, changeColor } = useToolbarStore();
 
   const [isActive, setIsActive] = useState("");
 
   const updateStrokeWidth = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    changeWidth(activeMenuItem, parseInt(e.target.value, 10));
+  };
+
+  const handleChangeColor = (color: Colors) => {
+    setIsActive(color);
+    changeColor(activeMenuItem, color);
   };
 
   return (
@@ -31,7 +37,7 @@ const Toolbar = () => {
               style={{ backgroundColor: color }}
               key={color}
               title={color}
-              onClick={() => setIsActive(color)}
+              onClick={() => handleChangeColor(color)}
             />
           ))}
         </div>
