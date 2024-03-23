@@ -10,7 +10,9 @@ import { Colors } from "../constants";
 
 const Toolbar = () => {
   const { activeMenuItem } = useMenuStore();
-  const { changeWidth, changeColor } = useToolbarStore();
+  const { changeWidth, changeColor, tools } = useToolbarStore();
+
+  const { size } = tools[activeMenuItem];
 
   const [isActive, setIsActive] = useState("");
 
@@ -49,7 +51,7 @@ const Toolbar = () => {
           min={1}
           max={10}
           step={1}
-          defaultValue={3}
+          defaultValue={size}
           onChange={updateStrokeWidth}
           className="p-0"
         />
