@@ -24,8 +24,6 @@ const CanvasBoard = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    console.log(canvasHistory.current);
-
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -94,7 +92,10 @@ const CanvasBoard = () => {
       ctx.beginPath();
       ctx.moveTo(x, y);
 
-      if (activeMenuItem === ACTIVE_MENU_ITEMS.LINE) {
+      if (
+        activeMenuItem === ACTIVE_MENU_ITEMS.LINE ||
+        activeMenuItem === ACTIVE_MENU_ITEMS.RECTANGLE
+      ) {
         startX.current = x;
         startY.current = y;
       }
@@ -115,6 +116,10 @@ const CanvasBoard = () => {
         ctx.moveTo(startX.current, startY.current);
         ctx.lineTo(x, y);
         ctx.stroke();
+      } else if (activeMenuItem === ACTIVE_MENU_ITEMS.RECTANGLE) {
+        const width = x - startX.current;
+        const height = y - startY.current;
+        ctx.strokeRect(startX.current, startY.current, width, height);
       } else {
         ctx.lineTo(x, y);
         ctx.stroke();
