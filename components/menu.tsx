@@ -104,7 +104,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="absolute top-4 flex justify-center align-center gap-1 shadow-md border dark:bg-secondary px-1.5 py-1 rounded-xl">
+    <div className="max-sm:left-20 absolute top-4 flex justify-center align-center gap-1 shadow-md border dark:bg-secondary px-1.5 py-1 rounded-xl flex-wrap">
       {activeItems.map(({ Icon, title, size, id }) => (
         <span
           key={title}
