@@ -92,15 +92,8 @@ const CanvasBoard = () => {
       ctx.beginPath();
       ctx.moveTo(x, y);
 
-      if (
-        activeMenuItem === ACTIVE_MENU_ITEMS.LINE ||
-        activeMenuItem === ACTIVE_MENU_ITEMS.RECTANGLE ||
-        activeMenuItem === ACTIVE_MENU_ITEMS.DIAMOND ||
-        activeMenuItem === ACTIVE_MENU_ITEMS.ELLIPSE
-      ) {
-        startX.current = x;
-        startY.current = y;
-      }
+      startX.current = x;
+      startY.current = y;
     };
 
     const handleDrawing = (x: number, y: number) => {
@@ -137,10 +130,6 @@ const CanvasBoard = () => {
       } else if (activeMenuItem === ACTIVE_MENU_ITEMS.ELLIPSE) {
         const radiusX = Math.abs(x - startX.current);
         const radiusY = Math.abs(y - startY.current);
-
-        console.log(startX.current, startY.current, x, y);
-
-        console.log(radiusX, radiusY);
 
         ctx.beginPath();
         ctx.ellipse(
