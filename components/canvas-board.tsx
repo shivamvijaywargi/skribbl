@@ -24,6 +24,8 @@ const CanvasBoard = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
 
+    console.log(canvasHistory.current);
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -49,6 +51,7 @@ const CanvasBoard = () => {
         actionMenuItem === ACTION_MENU_ITEMS.UNDO
       ) {
         historyPosition.current--;
+        ctx.putImageData(canvasHistory.current[historyPosition.current], 0, 0);
       }
 
       if (
@@ -56,12 +59,17 @@ const CanvasBoard = () => {
         actionMenuItem === ACTION_MENU_ITEMS.REDO
       ) {
         historyPosition.current++;
+        ctx.putImageData(canvasHistory.current[historyPosition.current], 0, 0);
       }
-
-      ctx.putImageData(canvasHistory.current[historyPosition.current], 0, 0);
     } else if (actionMenuItem === ACTION_MENU_ITEMS.CLEAR) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      canvasHistory.current = [];
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      canvasHistory.current.push(imageData);
+      historyPosition.current = canvasHistory.current.length - 1;
+      ctx.putImageData(canvasHistory.current[historyPosition.current], 0, 0);
+
       setActionMenu(null);
     }
 
