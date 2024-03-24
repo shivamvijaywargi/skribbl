@@ -94,7 +94,8 @@ const CanvasBoard = () => {
 
       if (
         activeMenuItem === ACTIVE_MENU_ITEMS.LINE ||
-        activeMenuItem === ACTIVE_MENU_ITEMS.RECTANGLE
+        activeMenuItem === ACTIVE_MENU_ITEMS.RECTANGLE ||
+        activeMenuItem === ACTIVE_MENU_ITEMS.DIAMOND
       ) {
         startX.current = x;
         startY.current = y;
@@ -120,6 +121,16 @@ const CanvasBoard = () => {
         const width = x - startX.current;
         const height = y - startY.current;
         ctx.strokeRect(startX.current, startY.current, width, height);
+      } else if (activeMenuItem === ACTIVE_MENU_ITEMS.DIAMOND) {
+        const width = x - startX.current;
+        const height = y - startY.current;
+        ctx.beginPath();
+        ctx.moveTo(startX.current + width / 2, startY.current);
+        ctx.lineTo(startX.current, startY.current + height / 2);
+        ctx.lineTo(startX.current + width / 2, startY.current + height);
+        ctx.lineTo(startX.current + width, startY.current + height / 2);
+        ctx.closePath();
+        ctx.stroke();
       } else {
         ctx.lineTo(x, y);
         ctx.stroke();
