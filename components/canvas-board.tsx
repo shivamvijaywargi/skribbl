@@ -95,7 +95,8 @@ const CanvasBoard = () => {
       if (
         activeMenuItem === ACTIVE_MENU_ITEMS.LINE ||
         activeMenuItem === ACTIVE_MENU_ITEMS.RECTANGLE ||
-        activeMenuItem === ACTIVE_MENU_ITEMS.DIAMOND
+        activeMenuItem === ACTIVE_MENU_ITEMS.DIAMOND ||
+        activeMenuItem === ACTIVE_MENU_ITEMS.ELLIPSE
       ) {
         startX.current = x;
         startY.current = y;
@@ -143,8 +144,8 @@ const CanvasBoard = () => {
 
         ctx.beginPath();
         ctx.ellipse(
-          x - startX.current,
-          y - startY.current,
+          startX.current,
+          startY.current,
           radiusX,
           radiusY,
           0,
