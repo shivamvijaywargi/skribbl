@@ -31,6 +31,7 @@ const initialToolbarState = {
     [ACTIVE_MENU_ITEMS.ELLIPSE]: { color: Colors.WHITE, size: 3 },
     [ACTIVE_MENU_ITEMS.ARROW]: { color: Colors.WHITE, size: 3 },
     [ACTIVE_MENU_ITEMS.LINE]: { color: Colors.WHITE, size: 3 },
+    [ACTIVE_MENU_ITEMS.TYPE]: { color: Colors.WHITE, size: 16 },
   },
   actions: {
     [ACTION_MENU_ITEMS.UNDO]: {},

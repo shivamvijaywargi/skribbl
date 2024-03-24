@@ -11,6 +11,7 @@ import {
   Presentation,
   RedoDot,
   Square,
+  Type,
   UndoDot,
 } from "lucide-react";
 
@@ -61,6 +62,12 @@ const activeItems = [
     id: ACTIVE_MENU_ITEMS.LINE,
     title: "Line",
     Icon: Minus,
+    size: 20,
+  },
+  {
+    id: ACTIVE_MENU_ITEMS.TYPE,
+    title: "Text",
+    Icon: Type,
     size: 20,
   },
 ];

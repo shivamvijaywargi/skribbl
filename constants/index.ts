@@ -18,6 +18,7 @@ export enum MENU_ITEMS {
   ELLIPSE = "Ellipse",
   ARROW = "Arrow",
   LINE = "Line",
+  TYPE = "Type",
   UNDO = "Undo",
   REDO = "Redo",
   CLEAR = "Clear",
@@ -32,6 +33,7 @@ export enum ACTIVE_MENU_ITEMS {
   ELLIPSE = MENU_ITEMS.ELLIPSE,
   ARROW = MENU_ITEMS.ARROW,
   LINE = MENU_ITEMS.LINE,
+  TYPE = MENU_ITEMS.TYPE,
 }
 
 export enum ACTION_MENU_ITEMS {

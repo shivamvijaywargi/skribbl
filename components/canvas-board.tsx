@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 
 import { useMenuStore, useToolbarStore } from "@/store";
 import { ACTION_MENU_ITEMS, ACTIVE_MENU_ITEMS } from "@/constants";
+import { cn } from "@/lib/utils";
 
 const CanvasBoard = () => {
   const { theme } = useTheme();
@@ -13,6 +14,8 @@ const CanvasBoard = () => {
   const { tools } = useToolbarStore();
 
   const { color, size } = tools[activeMenuItem];
+
+  const [textInput, setTextInput] = useState("");
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const shouldDraw = useRef(false);
@@ -142,6 +145,11 @@ const CanvasBoard = () => {
           2 * Math.PI
         );
         ctx.stroke();
+      } else if (activeMenuItem === ACTIVE_MENU_ITEMS.TYPE) {
+        // Handle typing text onto the canvas
+        ctx.font = `${size}px Arial`;
+        ctx.fillStyle = color;
+        ctx.fillText(textInput, x, y);
       } else {
         ctx.lineTo(x, y);
         ctx.stroke();
@@ -204,7 +212,7 @@ const CanvasBoard = () => {
       canvas.removeEventListener("touchmove", handleTouchMove);
       canvas.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [activeMenuItem, color, size]);
+  }, [activeMenuItem, color, size, textInput]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -222,7 +230,25 @@ const CanvasBoard = () => {
     changeConfig();
   }, [color, size]);
 
-  return <canvas ref={canvasRef}></canvas>;
+  return (
+    <>
+      <input
+        type="text"
+        onChange={(e) => setTextInput(e.target.value)}
+        className={cn(
+          activeMenuItem !== ACTIVE_MENU_ITEMS.TYPE ? "hidden" : "block",
+          "bg-transparent"
+        )}
+        value={textInput}
+        style={{
+          position: "absolute",
+          left: startX.current,
+          top: startY.current,
+        }}
+      />
+      <canvas ref={canvasRef}></canvas>
+    </>
+  );
 };
 
 export default CanvasBoard;
