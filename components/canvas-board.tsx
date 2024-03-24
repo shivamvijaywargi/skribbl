@@ -120,16 +120,37 @@ const CanvasBoard = () => {
       } else if (activeMenuItem === ACTIVE_MENU_ITEMS.RECTANGLE) {
         const width = x - startX.current;
         const height = y - startY.current;
+
         ctx.strokeRect(startX.current, startY.current, width, height);
       } else if (activeMenuItem === ACTIVE_MENU_ITEMS.DIAMOND) {
         const width = x - startX.current;
         const height = y - startY.current;
+
         ctx.beginPath();
         ctx.moveTo(startX.current + width / 2, startY.current);
         ctx.lineTo(startX.current, startY.current + height / 2);
         ctx.lineTo(startX.current + width / 2, startY.current + height);
         ctx.lineTo(startX.current + width, startY.current + height / 2);
         ctx.closePath();
+        ctx.stroke();
+      } else if (activeMenuItem === ACTIVE_MENU_ITEMS.ELLIPSE) {
+        const radiusX = Math.abs(x - startX.current);
+        const radiusY = Math.abs(y - startY.current);
+
+        console.log(startX.current, startY.current, x, y);
+
+        console.log(radiusX, radiusY);
+
+        ctx.beginPath();
+        ctx.ellipse(
+          x - startX.current,
+          y - startY.current,
+          radiusX,
+          radiusY,
+          0,
+          0,
+          2 * Math.PI
+        );
         ctx.stroke();
       } else {
         ctx.lineTo(x, y);
