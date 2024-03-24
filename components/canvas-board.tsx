@@ -80,19 +80,19 @@ const CanvasBoard = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const handleMouseDown = (e: MouseEvent) => {
+    const handleStartDrawing = (x: number, y: number) => {
       shouldDraw.current = true;
 
       ctx.beginPath();
-      ctx.moveTo(e.clientX, e.clientY);
+      ctx.moveTo(x, y);
 
       if (activeMenuItem === ACTIVE_MENU_ITEMS.LINE) {
-        startX.current = e.clientX;
-        startY.current = e.clientY;
+        startX.current = x;
+        startY.current = y;
       }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleDrawing = (x: number, y: number) => {
       if (!shouldDraw.current) return;
 
       ctx.strokeStyle = color;
@@ -105,15 +105,15 @@ const CanvasBoard = () => {
       if (activeMenuItem === ACTIVE_MENU_ITEMS.LINE) {
         ctx.beginPath();
         ctx.moveTo(startX.current, startY.current);
-        ctx.lineTo(e.clientX, e.clientY);
+        ctx.lineTo(x, y);
         ctx.stroke();
       } else {
-        ctx.lineTo(e.clientX, e.clientY);
+        ctx.lineTo(x, y);
         ctx.stroke();
       }
     };
 
-    const handleMouseUp = () => {
+    const handleStopDrawing = () => {
       shouldDraw.current = false;
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -122,14 +122,52 @@ const CanvasBoard = () => {
       historyPosition.current = canvasHistory.current.length - 1;
     };
 
+    const handleMouseDown = (e: MouseEvent) => {
+      handleStartDrawing(e.clientX, e.clientY);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      handleDrawing(e.clientX, e.clientY);
+    };
+
+    const handleMouseUp = () => {
+      handleStopDrawing();
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      handleStartDrawing(touch.clientX, touch.clientY);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      handleDrawing(touch.clientX, touch.clientY);
+    };
+
+    const handleTouchEnd = () => {
+      handleStopDrawing();
+    };
+
+    // Desktop events
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseup", handleMouseUp);
 
+    // Mobile events
+    canvas.addEventListener("touchstart", handleTouchStart);
+    canvas.addEventListener("touchmove", handleTouchMove);
+    canvas.addEventListener("touchend", handleTouchEnd);
+
     return () => {
+      // Clean up Desktop event listeners
       canvas.removeEventListener("mousedown", handleMouseDown);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseup", handleMouseUp);
+
+      // Clean up Mobile event listeners
+      canvas.removeEventListener("touchstart", handleTouchStart);
+      canvas.removeEventListener("touchmove", handleTouchMove);
+      canvas.removeEventListener("touchend", handleTouchEnd);
     };
   }, [activeMenuItem, color, size]);
 
